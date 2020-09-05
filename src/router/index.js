@@ -16,7 +16,7 @@ Vue.use(VueRouter)
     component: () => import('../views/Tutorial.vue')
   },
   {
-    path: '/tutoriais/add',
+    path: '/tutoriais/novo',
     name: 'Novo',
     component: () => import('../views/AddTutorial.vue')
   }
