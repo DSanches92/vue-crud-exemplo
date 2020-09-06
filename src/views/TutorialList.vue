@@ -1,5 +1,5 @@
 <template>
-<div class="list row">
+<div class="list row" v-if="tutoriais.length">
   <div class="col-md-8">
     <div class="input-group mb-3">
       <input type="text" class="form-control" placeholder="Procurar pelo Título" v-model="titulo" />
@@ -10,7 +10,8 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6">
+
+  <div class="col-md-5">
     <h4>Lista de Tutoriais</h4>
     <ul class="list-group">
       <li class="list-group-item" :class="{ active: index == currentIndex }" v-for="(tutorial, index) in tutoriais" :key="index" @click="setActiveTutorial(tutorial, index)">
@@ -18,11 +19,12 @@
       </li>
     </ul>
 
-    <button class="m-3 btn btn-sm btn-danger" @click="removeAllTutorials">
+    <button class="m-3 btn btn-sm btn-danger disable" @click="removeAllTutorials">
       Excluir Todos
     </button>
   </div>
-  <div class="col-md-6">
+
+  <div class="col-md-7">
     <div v-if="currentTutorial">
       <h4>Tutorial</h4>
       <div>
@@ -35,15 +37,14 @@
         <label><strong>Status:</strong></label> {{ currentTutorial.publicado ? "Publicado" : "Pendente" }}
       </div>
 
-      <a class="badge badge-warning" :href="'/tutoriais/' + currentTutorial.id">
+      <a class="badge badge-warning" :href="'/tutorial/' + currentTutorial.id">
         Editar
       </a>
     </div>
-    <div v-else>
-      <br />
-      <p>Selecione um Tutorial...</p>
-    </div>
   </div>
+</div>
+<div class="col-md-8" v-else>
+  <span>Nenhum tutorial cadastrado...</span>
 </div>
 </template>
 
@@ -99,10 +100,11 @@ export default {
         .catch(erro => {
           console.log(erro)
         })
-    },
-    mounted() {
-      this.retrieveTutorials();
-    },
+    }
+  },
+
+  mounted() {
+    this.retrieveTutorials()
   }
 }
 </script>
@@ -110,7 +112,6 @@ export default {
 <style>
 .list {
   text-align: left;
-  max-width: 750px;
   margin: auto;
 }
 </style>

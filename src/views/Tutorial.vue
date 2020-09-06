@@ -1,11 +1,13 @@
 <template>
 <div v-if="currentTutorial" class="edit-form">
-  <h4>Tutorial</h4>
   <form>
-    <div class="form-group">
-      <label for="titulo">Título</label>
-      <input type="text" class="form-control" id="titulo" v-model="currentTutorial.titulo" />
+    <div class="form-row">
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text" class="form-control" id="titulo" v-model="currentTutorial.titulo" />
+      </div>
     </div>
+
     <div class="form-group">
       <label for="descricao">Descrição</label>
       <input type="text" class="form-control" id="descricao" v-model="currentTutorial.descricao" />
@@ -32,11 +34,6 @@
     Atualizar
   </button>
   <p>{{ message }}</p>
-</div>
-
-<div v-else>
-  <br />
-  <p>Selecione um Tutorial...</p>
 </div>
 </template>
 
@@ -96,26 +93,23 @@ export default {
       TutorialService.delete(this.currentTutorial.id)
         .then(res => {
           console.log(res.data)
-          this.$router.push({
-            name: "tutoriais"
-          })
+          this.$router.push("/")
         })
         .catch(erro => {
           console.log(erro)
         })
-    },
-
-    mounted() {
-      this.message = ''
-      this.getTutorial(this.$router.params.id)
     }
+  },
+
+  mounted() {
+    this.message = ''
+    this.getTutorial(this.$route.params.id)
   }
 }
 </script>
 
 <style>
 .edit-form {
-  max-width: 300px;
   margin: auto;
 }
 </style>

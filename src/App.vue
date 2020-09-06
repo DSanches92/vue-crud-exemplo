@@ -4,10 +4,10 @@
     <span class="navbar-brand">Danilo</span>
     <div class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a href="/tutoriais" class="nav-link">Tutoriais</a>
+        <a href="/" class="nav-link">Tutoriais</a>
       </li>
       <li class="nav-item">
-        <a href="/tutoriais/novo" class="nav-link">Novo</a>
+        <a href="/novo" class="nav-link">Novo</a>
       </li>
     </div>
   </nav>
@@ -17,3 +17,9 @@
   </div>
 </div>
 </template>
+
+<script>
+export default {
+  name: 'app'
+}
+</script>

@@ -1,23 +1,25 @@
 <template>
-<div class="submit-form">
-  <div v-if="!submitted">
-    <div class="form-group">
+<div class="form-submit">
+  <div class="form-row">
+    <div class="form-group col-md-4">
       <label for="titulo">Título</label>
       <input type="text" class="form-control" id="titulo" required v-model="tutorial.titulo" name="titulo" />
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="descricao">Descrição</label>
-      <input class="form-control" id="descricao" required v-model="tutorial.descricao" name="descricao" />
-    </div>
+  <div class="form-group">
+    <label for="descricao">Descrição</label>
+    <input class="form-control" id="descricao" required v-model="tutorial.descricao" name="descricao" />
+  </div>
 
+  <div v-if="!submitted">
     <button @click="saveTutorial" class="btn btn-success">Enviar</button>
   </div>
-
   <div v-else>
-    <h4>You submitted successfully!</h4>
-    <button class="btn btn-success" @click="newTutorial">Novo</button>
+    <button @click="newTutorial" class="btn btn-success">Novo</button>
+    <p>{{ message }}</p>
   </div>
+
 </div>
 </template>
 
@@ -34,7 +36,8 @@ export default {
         descricao: "",
         publicado: false
       },
-      submited: false
+      submitted: false,
+      message: ''
     }
   },
   methods: {
@@ -48,15 +51,18 @@ export default {
         .then(res => {
           this.tutorial.id = res.data.id
           console.log(res.data)
-          this.submited = true
+          this.message = 'Tutorial "' + this.tutorial.titulo + '" salvo com sucesso!'
+          this.submitted = true
         })
         .catch(erro => {
           console.log(erro)
+          this.message = erro.message
         })
     },
 
     newTutorial() {
-      this.submited = false
+      this.submitted = false
+      this.message = ''
       this.tutorial = {}
     }
   }

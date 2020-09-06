@@ -11,12 +11,14 @@ Vue.use(VueRouter)
     component: () => import("../views/TutorialList.vue")
   },
   {
-    path: '/tutoriais/:id',
+    path: '/tutorial/:id',
+    alias: '/tutoriais/:id',
     name: 'Tutorial',
     component: () => import('../views/Tutorial.vue')
   },
   {
-    path: '/tutoriais/novo',
+    path: '/novo',
+    alias: '/tutoriais',
     name: 'Novo',
     component: () => import('../views/AddTutorial.vue')
   }
@@ -24,7 +26,6 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
   routes
 })
 
